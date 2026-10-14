@@ -14,6 +14,7 @@ except FileNotFoundError:
     print("job.txt not found")
     exit()
 
+
 for skill in job_wants:
     if skill in job_text and skill not  in my_skills:
         gaps.append(skill)
