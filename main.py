@@ -1,7 +1,7 @@
 import json 
 
 matched=[]
-missing=[]
+# missing=[]
 gaps=[]
 
 
@@ -34,8 +34,8 @@ print("Gaps:",gaps)
 for skill in my_skills:
     if skill.lower() in job_text:
         matched.append(skill)
-    else:
-        missing.append(skill)
+    # else:
+        # missing.append(skill)
 
 print("Matched:",matched)
-print("Missing:",missing)
+# print("Missing:",missing)
