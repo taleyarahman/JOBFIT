@@ -1,8 +1,11 @@
 matched=[]
 missing=[]
+gaps=[]
 
 
-my_skills = ["python", "sql", "git", "fastapi","Docker","MLOps","LLM"]
+my_skills = ["python", "sql", "git", "fastapi"]
+
+job_wants = ["python", "sql", "git", "fastapi", "docker", "mlops", "llm", "aws", "pytorch"]
 
 try:
     with open("job.txt","r") as f:
@@ -10,7 +13,13 @@ try:
 except FileNotFoundError:
     print("job.txt not found")
     exit()
-# print(job_text[:300])
+
+for skill in job_wants:
+    if skill in job_text and skill not  in my_skills:
+        gaps.append(skill)
+
+print("Gaps:",gaps)
+
 
 for skill in my_skills:
     if skill.lower() in job_text:

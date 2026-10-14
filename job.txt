@@ -5,3 +5,4 @@ Backend Engineering: Strong proficiency in Java or Kotlin with Spring Boot, spec
 Azure Cloud & Data: Hands-on experience with Azure OpenAI, Azure AI services, PostgreSQL, Service Bus, and Azure Container Apps within event-driven architectures.
 Infrastructure & Security: Solid foundation in Infrastructure as Code (Terraform), CI/CD pipelines, managed identities, Key Vault, autoscaling, and enterprise cloud security.
 LLM Ops & Observability: Proven ability to implement LLM evaluation frameworks, production telemetry, integration testing, cost governance, and real-time troubleshooting.
+Python and AWS  
