@@ -1,9 +1,18 @@
+import json 
+
 matched=[]
 missing=[]
 gaps=[]
 
 
-my_skills = ["python", "sql", "git", "fastapi"]
+# my_skills = ["python", "sql", "git", "fastapi"]  #deleted bcuz made the json list in json program
+try:
+    with open("skills.json", "r")as f:
+        my_skills=json.load(f)
+except FileNotFoundError:
+    print("skills.json not found:( ")
+    exit()
+
 
 job_wants = ["python", "sql", "git", "fastapi", "docker", "mlops", "llm", "aws", "pytorch"]
 
