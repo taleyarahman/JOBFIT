@@ -1,6 +1,6 @@
 import json 
 
-matched=[]
+
 def load_skills():
     try:
         with open("skills.json", "r")as f:
@@ -31,10 +31,13 @@ def find_gaps(job_text,my_skills,job_wants):
 
 gaps=find_gaps(job_text,my_skills,job_wants)
 print("Gaps: ",gaps)
- 
-for skill in my_skills:
-    if skill.lower() in job_text:
-        matched.append(skill)
-    
 
-print("Matched:",matched)
+def find_matches(job_text,my_skills):
+    matched=[]
+    for skill in my_skills:
+        if skill.lower() in job_text:
+            matched.append(skill)
+    return matched
+
+matched=find_matches(job_text,my_skills)
+print("Matched: ",matched)
