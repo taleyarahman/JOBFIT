@@ -1,43 +1,12 @@
-import json 
+import matcher
 
+job_wants=["python", "sql", "git", "fastapi", "docker", "mlops", "llm", "aws", "pytorch"]
 
-def load_skills():
-    try:
-        with open("skills.json", "r")as f:
-            return json.load(f)
-    except FileNotFoundError:
-        print("skills.json not found:( ")
-        exit()
+my_skills=matcher.load_skills()
+job_text=matcher.load_job()
 
-my_skills=load_skills()
+gaps=matcher.find_gaps(job_text,my_skills,job_wants)
+matched=matcher.find_matches(job_text,my_skills)
 
-job_wants = ["python", "sql", "git", "fastapi", "docker", "mlops", "llm", "aws", "pytorch"]
-def load_job():
-    try:
-        with open("job.txt","r") as f:
-            return f.read().strip().lower()
-    except FileNotFoundError:
-        print("job.txt not found")
-        exit()
-
-job_text=load_job()
-
-def find_gaps(job_text,my_skills,job_wants):
-    gaps=[] 
-    for skill in job_wants:
-        if skill in job_text and skill not  in my_skills:
-            gaps.append(skill)
-    return gaps
-
-gaps=find_gaps(job_text,my_skills,job_wants)
-print("Gaps: ",gaps)
-
-def find_matches(job_text,my_skills):
-    matched=[]
-    for skill in my_skills:
-        if skill.lower() in job_text:
-            matched.append(skill)
-    return matched
-
-matched=find_matches(job_text,my_skills)
+print("Gaps:",gaps)
 print("Matched: ",matched)
