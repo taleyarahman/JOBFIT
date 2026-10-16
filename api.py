@@ -2,7 +2,13 @@ import matcher
 
 from fastapi import FastAPI
 
+from pydantic import BaseModel
+
+class JobRequest(BaseModel):
+    text:str
+
 app = FastAPI()
+job_wants = ["python", "sql", "git", "fastapi", "docker", "mlops", "llm", "aws", "pytorch"]
 
 @app.get("/")
 def home():
@@ -17,9 +23,14 @@ description and lists the skills the job asks for that I don't have yet."""
 
 @app.get("/gaps")
 def gaps():
-    job_wants = ["python", "sql", "git", "fastapi", "docker", "mlops", "llm", "aws", "pytorch"]
     my_skills = matcher.load_skills()
     job_text = matcher.load_job()
     result=matcher.find_gaps(job_text,my_skills,job_wants)
-    return {"GAPS:": result}
+    return {"gaps:": result}
 
+@app.post("/analyze")
+def analyze(job: JobRequest):
+    my_skills = matcher.load_skills()
+    job_text=job.text.strip().lower()
+    result=matcher.find_gaps(job_text, my_skills,job_wants)
+    return {"gaps":result}
