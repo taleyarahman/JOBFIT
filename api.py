@@ -26,7 +26,7 @@ def gaps():
     my_skills = matcher.load_skills()
     job_text = matcher.load_job()
     result=matcher.find_gaps(job_text,my_skills,job_wants)
-    return {"gaps:": result}
+    return {"gaps": result}
 
 @app.post("/analyze")
 def analyze(job: JobRequest):
