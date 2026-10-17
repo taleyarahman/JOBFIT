@@ -10,7 +10,7 @@ description and lists the skills the job asks for that I don't have yet.
 2. You paste a job description into `job.txt`
 3. JobFit lists the skills the job asks for that you don't have yet
 
-## How to run
+## Run from the command line 
 
 1. Put `skills.json` and `job.txt` in the project folder
 2. Run:
@@ -26,10 +26,22 @@ Gaps: ['llm', 'aws']
 Matched: ['python', 'sql']
 
 ```
+## Run the API
+
+```
+uvicorn api:app --reload
+```
+
+Then open `http://127.0.0.1:8000/docs`. Send a job description to `POST /analyze` and it returns the skills you have (`matched`) and the skills you're missing (`gaps`).
+
+## Run the tests
+
+```
+pytest
+```
 
 ## Planned
 
 - Use an LLM to extract requirements, so "relational databases" matches `sql`
-- FastAPI endpoint
 - PostgreSQL to save every job checked
 - Deploy it online
