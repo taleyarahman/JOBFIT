@@ -1,3 +1,4 @@
+#EXTRACTION
 #it hands the job posting to Gemini like a person reading it, and asks “list the skills this job needs.” Gemini sends back a list, and your code turns it into a Python list.
 
 import json #Convert the model's text answer into a Python list. 
