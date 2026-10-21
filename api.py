@@ -1,5 +1,7 @@
 import matcher 
 
+from llm import compare_skills
+
 from fastapi import FastAPI
 
 from pydantic import BaseModel
@@ -35,3 +37,8 @@ def analyze(job: JobRequest):
     result=matcher.find_gaps(job_text, my_skills,job_wants)
     matched=matcher.find_matches(job_text,my_skills)
     return {"gaps":result, "matched":matched}
+
+@app.post("/analyze-ai")
+def analyze_ai(job: JobRequest):
+    my_skills = matcher.load_skills()
+    return compare_skills(job.text, my_skills)
