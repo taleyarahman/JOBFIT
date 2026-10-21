@@ -28,8 +28,8 @@ job posting:
     except json.JSONDecodeError:
         return[]
 
-    
 
+#COMPARISON
 def compare_skills(job_text, my_skills):
     prompt = f"""Read the job posting below and work out the technical skills it requires.
 Compare them to MY SKILLS. Skills that mean the same thing count as a match
