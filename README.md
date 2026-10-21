@@ -26,13 +26,35 @@ Gaps: ['llm', 'aws']
 Matched: ['python', 'sql']
 
 ```
+
 ## Run the API
 
 ```
 uvicorn api:app --reload
 ```
 
-Then open `http://127.0.0.1:8000/docs`. Send a job description to `POST /analyze` and it returns the skills you have (`matched`) and the skills you're missing (`gaps`).
+Then open `http://127.0.0.1:8000/docs`. Send a job description to `POST /analyze` (keyword matching) or `POST /analyze-ai` (Gemini). Both return `matched`, the skills you have, and `gaps`, the skills you're missing.
+
+## Keyword vs AI
+
+Same job posting sent to both endpoints:
+
+> We need containerization, relational databases, and cloud experience. 
+
+`POST /analyze` (Keyword matching ) finds nothing, because the posting never uses the exact words on the checklist:
+
+```json
+{"gaps":[],"matched":[]}
+```
+
+`POST /analyze-ai` (Gemini) understands what the posting means:
+
+```json
+{"matched": ["relational databases"], "gaps": ["containerization", "cloud experience"]}
+```
+
+To use `/analyze-ai`, create a `.env` file with `GEMINI_API_KEY=your-key`. The key is never committed.
+
 
 ## Run the tests
 
@@ -42,6 +64,5 @@ pytest
 
 ## Planned
 
-- Use an LLM to extract requirements, so "relational databases" matches `sql`
 - PostgreSQL to save every job checked
 - Deploy it online
