@@ -35,7 +35,7 @@ uvicorn api:app --reload
 
 Then open `http://127.0.0.1:8000/docs`. Send a job description to `POST /analyze` (keyword matching) or `POST /analyze-ai` (Gemini). Both return `matched`, the skills you have, and `gaps`, the skills you're missing.
 
-## Keyword vs AI
+## Keyword VS AI 
 
 Same job posting sent to both endpoints:
 
