@@ -14,7 +14,7 @@ job_wants = ["python", "sql", "git", "fastapi", "docker", "mlops", "llm", "aws",
 
 @app.get("/")
 def home():
-    return {"message":"JOBFIT  is running"}
+    return {"message":"JOBFIT is running"}
 
 @app.get("/about")
 def about():
