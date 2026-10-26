@@ -18,3 +18,11 @@ def get_jobs():
         with conn.cursor() as cur:    #A cursor is the object that sends SQL and collects results.
             cur.execute("SELECT id , title , company FROM jobs")  #runs the same SELECT , typed in psql
             return cur.fetchall()    # fetchall() returns every row as a list of tuples
+
+def save_job(title, company, job_text):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "INSERT INTO jobs (title, company, job_text) VALUES(%s,%s,%s)",
+                (title,company, job_text),
+            )
