@@ -6,8 +6,12 @@ from fastapi import FastAPI
 
 from pydantic import BaseModel
 
+from db import save_job
+
 class JobRequest(BaseModel):
     text:str
+    title:str = "Untitled"
+    company:str = "Unknown"
 
 app = FastAPI()
 job_wants = ["python", "sql", "git", "fastapi", "docker", "mlops", "llm", "aws", "pytorch"]
@@ -37,8 +41,10 @@ def analyze(job: JobRequest):
     result=matcher.find_gaps(job_text, my_skills,job_wants)
     matched=matcher.find_matches(job_text,my_skills)
     return {"gaps":result, "matched":matched}
-
+    
 @app.post("/analyze-ai")
 def analyze_ai(job: JobRequest):
     my_skills = matcher.load_skills()
-    return compare_skills(job.text, my_skills)
+    result = compare_skills(job.text, my_skills)
+    save_job(job.title,job.company,job.text)      # the three fields from the request
+    return result
