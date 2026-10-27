@@ -6,7 +6,8 @@ from fastapi import FastAPI
 
 from pydantic import BaseModel
 
-from db import save_job
+from db import save_job,get_jobs
+
 
 class JobRequest(BaseModel):
     text:str
@@ -48,3 +49,11 @@ def analyze_ai(job: JobRequest):
     result = compare_skills(job.text, my_skills)
     save_job(job.title,job.company,job.text)      # the three fields from the request
     return result
+
+@app.get("/jobs")
+def list_jobs():
+    rows=get_jobs()
+    jobs=[]
+    for row in rows:
+        jobs.append({"id":row[0],"title":row[1],"company":row[2]})
+    return jobs
