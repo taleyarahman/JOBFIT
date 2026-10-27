@@ -47,7 +47,7 @@ def analyze(job: JobRequest):
 def analyze_ai(job: JobRequest):
     my_skills = matcher.load_skills()
     result = compare_skills(job.text, my_skills)
-    save_job(job.title,job.company,job.text)      # the three fields from the request
+    save_job(job.title,job.company,job.text,result.get("gaps",[]))      # the three fields from the request
     return result
 
 @app.get("/jobs")
