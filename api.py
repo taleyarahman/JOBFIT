@@ -6,7 +6,7 @@ from fastapi import FastAPI
 
 from pydantic import BaseModel
 
-from db import save_job,get_jobs
+from db import save_job,get_jobs,top_gaps
 
 
 class JobRequest(BaseModel):
@@ -57,3 +57,8 @@ def list_jobs():
     for row in rows:
         jobs.append({"id":row[0],"title":row[1],"company":row[2]})
     return jobs
+
+@app.get("/top-gaps")
+def top_gaps_endpoint():
+    rows = top_gaps()
+    return [{"skill":row[0], "times_missing": row[1]} for row in rows]

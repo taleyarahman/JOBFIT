@@ -27,3 +27,13 @@ def save_job(title, company, job_text, gaps=None):
                 (title,company, job_text,gaps),
             )
 
+def top_gaps():
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT skill, COUNT(*) AS times_missing
+                FROM jobs, UNNEST(gaps) AS skill
+                GROUP BY skill
+                ORDER BY times_missing
+            """)
+            return cur.fetchall()
