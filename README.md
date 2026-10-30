@@ -35,6 +35,15 @@ uvicorn api:app --reload
 
 Then open `http://127.0.0.1:8000/docs`. Send a job description to `POST /analyze` (keyword matching) or `POST /analyze-ai` (Gemini). Both return `matched`, the skills you have, and `gaps`, the skills you're missing.
 
+Other endpoints:
+
+- `POST /analyze-ai` also saves every analyzed job (title, company, text, gaps) to PostgreSQL.
+- `GET /jobs` lists all saved jobs.
+- `GET /top-gaps` ranks the skills you're missing most often across all saved jobs.
+
+Requires PostgreSQL running locally with a `jobfit` database, and a `.env` file with `GEMINI_API_KEY` and `DB_PASSWORD`.
+
+
 ## Keyword VS AI 
 
 Same job posting sent to both endpoints:
