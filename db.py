@@ -34,6 +34,6 @@ def top_gaps():
                 SELECT skill, COUNT(*) AS times_missing
                 FROM jobs, UNNEST(gaps) AS skill
                 GROUP BY skill
-                ORDER BY times_missing
+                ORDER BY times_missing DESC, skill
             """)
             return cur.fetchall()
