@@ -9,7 +9,7 @@ def get_connection():  #opens a connection to the jobfit database i made, using 
         dbname="jobfit",
         user="postgres",
         password=os.getenv("DB_PASSWORD"),
-        host="localhost",
+        host=os.getenv("DB_HOST", "localhost"),
         port=5432,
     )
 
