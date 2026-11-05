@@ -43,6 +43,14 @@ Other endpoints:
 
 Requires PostgreSQL running locally with a `jobfit` database, and a `.env` file with `GEMINI_API_KEY` and `DB_PASSWORD`.
 
+## Run with Docker
+
+```
+docker build -t jobfit .
+docker run -p 8000:8000 --env-file .env -e DB_HOST=host.docker.internal jobfit
+```
+
+`--env-file` passes your secrets at runtime, so they are never baked into the image. `DB_HOST=host.docker.internal` lets the container reach PostgreSQL running on your machine.
 
 ## Keyword VS AI 
 
