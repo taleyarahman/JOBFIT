@@ -4,14 +4,19 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def get_connection():  #opens a connection to the jobfit database i made, using the password from .env, the same pattern as Gemini key.
-    return psycopg.connect(
-        dbname="jobfit",
-        user="postgres",
-        password=os.getenv("DB_PASSWORD"),
-        host=os.getenv("DB_HOST", "localhost"),
-        port=5432,
+def get_connection():
+    url = os.getenv("DATABASE_URL")  #opens a connection to the PostgreSQL database.
+    if url:
+        return psycopg.connect(url)
+    else:
+        return psycopg.connect(
+            dbname="jobfit",
+            user="postgres",
+            password=os.getenv("DB_PASSWORD"),
+            host=os.getenv("DB_HOST", "localhost"),
+            port=5432,
     )
+
 
 def get_jobs():
     with get_connection() as conn:
